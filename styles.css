@@ -85,7 +85,7 @@ body {
       width: 100px;
       height: 100px;
       object-fit: contain;
-      margin-bottom: 16px;
+      margin-bottom: 8px;
     }
 
     .movie__title {
