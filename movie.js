@@ -17,4 +17,17 @@ async function displayMovie() {
       `;
 }
 
+function runSearch() {
+  searchValue = document.getElementById("searchInput").value.trim();
+  console.log("Searching for: ", searchValue);
+  main();
+  //get movie result[0].imdbID;
+  // localStorage.setItem("movieData", movieID);
+  // window.refresh();
+}
+
+function onSearchChange(event) {
+searchValue = event.target.value;
+}
+
 displayMovie();

@@ -5,24 +5,18 @@ let searchValue = "";
 const movieList = document.querySelector(".movies");
 
 async function main() {
-  if (!searchValue) {
-    movieList.innerHTML = "<p>Enter a Movie Title</p>";
-    return;
-  }
-
   const movies = await fetch(
     `http://www.omdbapi.com/?apikey=4c277607&s=${searchValue}`
   );
   const moviesData = await movies.json();
 
-  if (moviesData.Response === "True") {
-    // Used slice to limit display of items to 9 on the page
-    movieList.innerHTML = moviesData.Search.slice(0, 9)
-      .map((moviesData) => moviesDataHTML(moviesData))
-      .join("");
-  } else {
-    movieList.innterHTML = `<p>No results found for ${searchValue}.</p>`;
-  }
+  if (!searchValue) return (movieList.innerHTML = "<p>Enter a Movie Title</p>");
+  movieList.innerHTML =
+    moviesData.Response === "True"
+      ? moviesData.Search.slice(0, 6)
+          .map((movie) => moviesDataHTML(movie))
+          .join("")
+      : `<p>No results found for '${searchValue}'</p>`;
   console.log("Search value is:", searchValue);
 }
 
@@ -32,15 +26,12 @@ function onSearchChange(event) {
 
 function runSearch() {
   searchValue = document.getElementById("searchInput").value.trim();
-  console.log("Searching for: ", searchValue);
-  // search logic here
+  console.log("Searching for: ", searchValue); 
   //get movie result[0].imdbID;
   // localStorage.setItem("movieData", movieID);
   // window.refresh();
   main();
 }
-
-
 
 function showMovieInfo(moviesData) {
   localStorage.setItem("imdbID", moviesData);
@@ -56,3 +47,5 @@ function moviesDataHTML(moviesData) {
       <div class="movie__year">${moviesData.Year}</div>
       </div>`;
 }
+
+
