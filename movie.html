@@ -1,25 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Movie</title>
     <link rel="stylesheet" href="./styles.css" />
     <script src="movie.js" defer></script>
-</head>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="search-container">
-    <input type="text" placeholder="Search by Title..." onchange="onSearchChange()">
-  </div>
-        <div class="movie__card">
-      <img class="movie__img" src="" alt=" ">
-      <div class="movie__title">Movie Title</div>
-      <div class="movie__year">Release Year</div>
-      
+  </head>
+  <body>
+    <div class="container">
+      <div class="row">
+        <div class="search-container">
+          <input
+          id="searchInput"
+            type="text"
+            placeholder="Search by Title..."
+            onchange="onSearchChange(event)"
+          />
+          <button onclick="runSearch()">Search</button>
+        </div>
+        <div class="movies">
+          <div class="movie__card">
+            <img class="movie__img" src="" alt=" " />
+            <div class="movie__title">Movie Title</div>
+            <div class="movie__year">Release Year</div>
+          </div>
+        </div>
+      </div>
     </div>
-    </div>
-  </div>
-</body>
+  </body>
 </html>

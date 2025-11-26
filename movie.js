@@ -1,18 +1,37 @@
 const movieContainer = document.querySelector('.movies');
 
+function onSearchChange(event) { 
+    searchValue = event.target.value;     
+}
+
+let searchValue = "";
+const movieList = document.querySelector(".movies");
+
 async function displayMovie() {
-    const movieData = localStorage.getItem('movieInfo');
-    const poster = await fetch (`http://www.omdbapi.com/?apikey=4c277607&i=${movieData.imdbID}`)
+    const movieData = localStorage.getItem('imdbID');
+    const poster = await fetch (`http://www.omdbapi.com/?apikey=4c277607&i=${movieData}`)
     const posterImg = await poster.json();
-    console.log(posterImg)
 
-    movieContainer.innerHTML= posterImg.map(poster => `
-      <img class="movie__img" src="${moviesData.Poster}" alt="${moviesData.Title}">
-      <div class="movie__title">${moviesData.Title}</div>
-      <div class="movie__year">${moviesData.Year}</div>
-      `).join('');
+    movieContainer.innerHTML = `
+    <div class="movie__card">
+      <img class="movie__img" src="${posterImg.Poster}" alt="${posterImg.Title}">
+      <div class="movie__title">${posterImg.Title}</div>
+      <div class="movie__year">${posterImg.Year}</div>
+      </div>
+      `;
+}
 
+
+
+ async function runSearch (searchValue) {
+   searchValue = document.getElementById("searchInput").value;
+   console.log("Searching for: " , searchValue);
+   // search logic here
+   //get movie result[0].imdbID;
+   // localStorage.setItem("movieData", movieID);
+   // window.refresh(); 
 }
 
 displayMovie(); 
 
+ 
