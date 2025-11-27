@@ -40,8 +40,8 @@ function runSearch() {
 
 function showMovieInfo(moviesData) {
   localStorage.setItem("imdbID", moviesData);
-  window.location.href = "movie.html";
-  // window.location.href = `${window.location.origin}/movie.html`; REMOVED FOR DEBUGGING
+  // window.location.href = "movie.html";
+  window.location.href = `${window.location.origin}/movie.html`;
 }
 
 function moviesDataHTML(moviesData) {

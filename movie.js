@@ -20,7 +20,7 @@ async function displayMovie() {
 }
 
 function redirectToMainWithParams() {
-  window.location.href = `index.html?search=${encodeURIComponent(searchValue)}`;
+  window.location.href = `${window.location.origin}/index.html?search=${encodeURIComponent(searchValue)}`;
 }
 
 function onSearchChange(event) {
@@ -28,3 +28,6 @@ function onSearchChange(event) {
 }
 
 displayMovie();
+
+
+ 
