@@ -3,14 +3,22 @@
 
 let searchValue = "";
 const movieList = document.querySelector(".movies");
+const params = new URLSearchParams(window.location.search);
+const searchFromParams = params.get("search");
+const searchInput = document.getElementById("searchInput");
+
+if(searchFromParams) {
+  main();
+  searchInput.value = searchFromParams;
+}
 
 async function main() {
+  if (!searchValue && !searchFromParams) return (movieList.innerHTML = "<p>Enter a Movie Title!</p>");
   const movies = await fetch(
-    `http://www.omdbapi.com/?apikey=4c277607&s=${searchValue}`
+    `http://www.omdbapi.com/?apikey=4c277607&s=${searchFromParams || searchValue}`
   );
   const moviesData = await movies.json();
 
-  if (!searchValue) return (movieList.innerHTML = "<p>Enter a Movie Title</p>");
   movieList.innerHTML =
     moviesData.Response === "True"
       ? moviesData.Search.slice(0, 6)
@@ -27,16 +35,13 @@ function onSearchChange(event) {
 function runSearch() {
   searchValue = document.getElementById("searchInput").value.trim();
   console.log("Searching for: ", searchValue); 
-  //get movie result[0].imdbID;
-  // localStorage.setItem("movieData", movieID);
-  // window.refresh();
   main();
 }
 
 function showMovieInfo(moviesData) {
   localStorage.setItem("imdbID", moviesData);
-  // template string re-routes to actual URL of the webpage
-  window.location.href = `${window.location.origin}/movie.html`;
+  window.location.href = "movie.html";
+  // window.location.href = `${window.location.origin}/movie.html`; REMOVED FOR DEBUGGING
 }
 
 function moviesDataHTML(moviesData) {
@@ -47,5 +52,11 @@ function moviesDataHTML(moviesData) {
       <div class="movie__year">${moviesData.Year}</div>
       </div>`;
 }
+
+searchInput.addEventListener('keydown', function(event) {
+  if (event.key === 'Enter') {
+    runSearch();
+  }
+});
 
 

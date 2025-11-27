@@ -1,6 +1,8 @@
 const movieContainer = document.querySelector(".movies");
 const movieList = document.querySelector(".movies");
 
+let searchValue = "";
+
 async function displayMovie() {
   const movieData = localStorage.getItem("imdbID");
   const poster = await fetch(
@@ -17,17 +19,12 @@ async function displayMovie() {
       `;
 }
 
-function runSearch() {
-  searchValue = document.getElementById("searchInput").value.trim();
-  console.log("Searching for: ", searchValue);
-  main();
-  //get movie result[0].imdbID;
-  // localStorage.setItem("movieData", movieID);
-  // window.refresh();
+function redirectToMainWithParams() {
+  window.location.href = `index.html?search=${encodeURIComponent(searchValue)}`;
 }
 
 function onSearchChange(event) {
-searchValue = event.target.value;
+  searchValue = event.target.value;
 }
 
 displayMovie();
