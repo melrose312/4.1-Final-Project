@@ -15,7 +15,7 @@ if(searchFromParams) {
 async function main() {
   if (!searchValue && !searchFromParams) return (movieList.innerHTML = "<p>Enter a Movie Title!</p>");
   const movies = await fetch(
-    `http://www.omdbapi.com/?apikey=4c277607&s=${searchFromParams || searchValue}`
+    `https://www.omdbapi.com/?apikey=4c277607&s=${searchFromParams || searchValue}`
   );
   const moviesData = await movies.json();
 
