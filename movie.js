@@ -6,7 +6,7 @@ let searchValue = "";
 async function displayMovie() {
   const movieData = localStorage.getItem("imdbID");
   const poster = await fetch(
-    `http://www.omdbapi.com/?apikey=4c277607&i=${movieData}`
+    `https://www.omdbapi.com/?apikey=4c277607&i=${movieData}`
   );
   const posterImg = await poster.json();
 
